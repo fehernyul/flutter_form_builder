@@ -37,6 +37,10 @@ class GroupedCheckbox<T> extends StatelessWidget {
   /// Configures the minimum size of the tap target.
   final MaterialTapTargetSize? materialTapTargetSize;
 
+  //TVG ezeket nem vette át
+  final BorderSide? side;
+  final OutlinedBorder? shape;
+
   /// The color for the checkbox's Material when it has the input focus.
   final Color? focusColor;
 
@@ -202,6 +206,8 @@ class GroupedCheckbox<T> extends StatelessWidget {
     this.focusColor,
     this.hoverColor,
     this.materialTapTargetSize,
+    this.side,
+    this.shape,
     this.tristate = false,
     this.wrapDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
@@ -271,6 +277,8 @@ class GroupedCheckbox<T> extends StatelessWidget {
       focusColor: focusColor,
       hoverColor: hoverColor,
       materialTapTargetSize: materialTapTargetSize,
+      side: side,
+      shape: shape,
       value: tristate
           ? value?.contains(optionValue)
           : true == value?.contains(optionValue),

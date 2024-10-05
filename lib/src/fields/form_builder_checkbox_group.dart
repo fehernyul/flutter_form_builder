@@ -12,6 +12,8 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
   final Color? hoverColor;
   final List<T>? disabled;
   final MaterialTapTargetSize? materialTapTargetSize;
+  final BorderSide? side;
+  final OutlinedBorder? shape;
   final bool tristate;
   final Axis wrapDirection;
   final WrapAlignment wrapAlignment;
@@ -52,6 +54,8 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
     this.hoverColor,
     this.disabled,
     this.materialTapTargetSize,
+    this.side,
+    this.shape,
     this.tristate = false,
     this.wrapDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
@@ -86,6 +90,8 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
                 focusColor: focusColor,
                 checkColor: checkColor,
                 materialTapTargetSize: materialTapTargetSize,
+                side: side,
+                shape: shape,
                 hoverColor: hoverColor,
                 tristate: tristate,
                 wrapAlignment: wrapAlignment,
