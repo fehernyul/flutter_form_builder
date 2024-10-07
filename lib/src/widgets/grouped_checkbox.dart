@@ -38,8 +38,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
   final MaterialTapTargetSize? materialTapTargetSize;
 
   //TVG ezeket nem vette át
-  final BorderSide? side;
-  final OutlinedBorder? shape;
+  final Function? checkBoxThemeCallBack;
 
   /// The color for the checkbox's Material when it has the input focus.
   final Color? focusColor;
@@ -206,8 +205,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
     this.focusColor,
     this.hoverColor,
     this.materialTapTargetSize,
-    this.side,
-    this.shape,
+    this.checkBoxThemeCallBack,
     this.tristate = false,
     this.wrapDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
@@ -227,7 +225,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final widgetList = <Widget>[];
     for (var i = 0; i < options.length; i++) {
-      widgetList.add(buildItem(i));
+      widgetList.add(buildItem(i, context));
     }
     Widget finalWidget;
     if (orientation == OptionsOrientation.vertical) {
@@ -266,33 +264,39 @@ class GroupedCheckbox<T> extends StatelessWidget {
   }
 
   /// the composite of all the components for the option at index
-  Widget buildItem(int index) {
+  Widget buildItem(int index, BuildContext context) {
     final option = options[index];
     final optionValue = option.value;
     final isOptionDisabled = true == disabled?.contains(optionValue);
-    final control = Checkbox(
-      visualDensity: visualDensity,
-      activeColor: activeColor,
-      checkColor: checkColor,
-      focusColor: focusColor,
-      hoverColor: hoverColor,
-      materialTapTargetSize: materialTapTargetSize,
-      side: side,
-      shape: shape,
-      value: tristate
-          ? value?.contains(optionValue)
-          : true == value?.contains(optionValue),
-      tristate: tristate,
-      onChanged: isOptionDisabled
-          ? null
-          : (selected) {
-              List<T> selectedListItems = value == null ? [] : List.of(value!);
-              selected!
-                  ? selectedListItems.add(optionValue)
-                  : selectedListItems.remove(optionValue);
-              onChanged(selectedListItems);
-            },
+
+    Widget control = Checkbox(
+        visualDensity: visualDensity,
+        activeColor: activeColor,
+        checkColor: checkColor,
+        focusColor: focusColor,
+        hoverColor: hoverColor,
+        materialTapTargetSize: materialTapTargetSize,
+        tristate: tristate,
+
+        value: tristate
+            ? value?.contains(optionValue)
+            : true == value?.contains(optionValue),
+        onChanged: isOptionDisabled
+            ? null
+            : (selected) {
+          List<T> selectedListItems = value == null ? [] : List.of(value!);
+          selected!
+              ? selectedListItems.add(optionValue)
+              : selectedListItems.remove(optionValue);
+          onChanged(selectedListItems);
+        },
     );
+
+    if (checkBoxThemeCallBack!=null) {
+      control = checkBoxThemeCallBack!(context, control);
+    }
+
+
     final label = GestureDetector(
       onTap: isOptionDisabled
           ? null
@@ -343,5 +347,6 @@ class GroupedCheckbox<T> extends StatelessWidget {
     }
 
     return compositeItem;
+
   }
 }
