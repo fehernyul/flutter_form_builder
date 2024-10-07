@@ -12,6 +12,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
   final Color? hoverColor;
   final List<T>? disabled;
   final MaterialTapTargetSize? materialTapTargetSize;
+  final Function? checkBoxThemeCallBack;
   final bool tristate;
   final Axis wrapDirection;
   final WrapAlignment wrapAlignment;
@@ -28,6 +29,8 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
   /// Added to each item if provided.
   /// [GroupedCheckbox] applies the [itemDecorator] to each Checkbox
   final BoxDecoration? itemDecoration;
+
+
 
   /// Creates a list of Checkboxes for selecting multiple options
   FormBuilderCheckboxGroup({
@@ -52,6 +55,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
     this.hoverColor,
     this.disabled,
     this.materialTapTargetSize,
+    this.checkBoxThemeCallBack,
     this.tristate = false,
     this.wrapDirection = Axis.horizontal,
     this.wrapAlignment = WrapAlignment.start,
@@ -86,6 +90,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
                 focusColor: focusColor,
                 checkColor: checkColor,
                 materialTapTargetSize: materialTapTargetSize,
+                checkBoxThemeCallBack: checkBoxThemeCallBack,
                 hoverColor: hoverColor,
                 tristate: tristate,
                 wrapAlignment: wrapAlignment,
