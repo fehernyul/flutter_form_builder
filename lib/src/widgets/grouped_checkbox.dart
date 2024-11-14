@@ -270,32 +270,35 @@ class GroupedCheckbox<T> extends StatelessWidget {
     final isOptionDisabled = true == disabled?.contains(optionValue);
 
     Widget control = Checkbox(
-        visualDensity: visualDensity,
-        activeColor: activeColor,
-        checkColor: checkColor,
-        focusColor: focusColor,
-        hoverColor: hoverColor,
-        materialTapTargetSize: materialTapTargetSize,
-        tristate: tristate,
-
-        value: tristate
-            ? value?.contains(optionValue)
-            : true == value?.contains(optionValue),
-        onChanged: isOptionDisabled
-            ? null
-            : (selected) {
-          List<T> selectedListItems = value == null ? [] : List.of(value!);
-          selected!
-              ? selectedListItems.add(optionValue)
-              : selectedListItems.remove(optionValue);
-          onChanged(selectedListItems);
-        },
+      visualDensity: visualDensity,
+      activeColor: activeColor,
+      checkColor: checkColor,
+      focusColor: focusColor,
+      hoverColor: hoverColor,
+      materialTapTargetSize: materialTapTargetSize,
+      tristate: tristate,
+      value: tristate
+          ? value?.contains(optionValue)
+          : true == value?.contains(optionValue),
+      onChanged: isOptionDisabled
+          ? null
+          : (selected) {
+              List<T> selectedListItems = value == null ? [] : List.of(value!);
+              selected!
+                  ? selectedListItems.add(optionValue)
+                  : selectedListItems.remove(optionValue);
+              onChanged(selectedListItems);
+            },
     );
 
-    if (checkBoxThemeCallBack!=null) {
-      control = checkBoxThemeCallBack!(context, control);
+    if (checkBoxThemeCallBack != null) {
+      control = checkBoxThemeCallBack!(
+          context,
+          control,
+          tristate
+              ? value?.contains(optionValue)
+              : true == value?.contains(optionValue));
     }
-
 
     final label = GestureDetector(
       onTap: isOptionDisabled
@@ -347,6 +350,5 @@ class GroupedCheckbox<T> extends StatelessWidget {
     }
 
     return compositeItem;
-
   }
 }
