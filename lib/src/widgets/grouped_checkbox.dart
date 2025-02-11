@@ -192,6 +192,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
   /// If the [orientation] is set to [OptionsOrientation.horizontal] then
   /// [wrapSpacing] is used as inter-item right margin
   final BoxDecoration? itemDecoration;
+  final double? fixWidth;
 
   const GroupedCheckbox({
     super.key,
@@ -219,6 +220,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
     this.controlAffinity = ControlAffinity.leading,
     this.visualDensity,
     this.itemDecoration,
+    this.fixWidth
   });
 
   @override
@@ -338,6 +340,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
 
     if (this.itemDecoration != null) {
       compositeItem = Container(
+        width: this.fixWidth,
         decoration: this.itemDecoration,
         margin: EdgeInsets.only(
           bottom:

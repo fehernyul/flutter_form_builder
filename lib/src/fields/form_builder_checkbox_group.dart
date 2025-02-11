@@ -29,6 +29,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
   /// Added to each item if provided.
   /// [GroupedCheckbox] applies the [itemDecorator] to each Checkbox
   final BoxDecoration? itemDecoration;
+  final double? fixWidth;
 
 
 
@@ -69,6 +70,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
     this.controlAffinity = ControlAffinity.leading,
     this.orientation = OptionsOrientation.wrap,
     this.itemDecoration,
+    this.fixWidth
   }) : super(
           builder: (FormFieldState<List<T>?> field) {
             final state = field as _FormBuilderCheckboxGroupState<T>;
@@ -104,6 +106,7 @@ class FormBuilderCheckboxGroup<T> extends FormBuilderFieldDecoration<List<T>> {
                 separator: separator,
                 controlAffinity: controlAffinity,
                 itemDecoration: itemDecoration,
+                fixWidth: fixWidth,
               ),
             );
           },
