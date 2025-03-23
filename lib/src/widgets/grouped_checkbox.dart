@@ -37,7 +37,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
   /// Configures the minimum size of the tap target.
   final MaterialTapTargetSize? materialTapTargetSize;
 
-  //TVG ezeket nem vette át
+  //TVG - ezeket nem vette át
   final Function? checkBoxThemeCallBack;
 
   /// The color for the checkbox's Material when it has the input focus.
@@ -192,7 +192,7 @@ class GroupedCheckbox<T> extends StatelessWidget {
   /// If the [orientation] is set to [OptionsOrientation.horizontal] then
   /// [wrapSpacing] is used as inter-item right margin
   final BoxDecoration? itemDecoration;
-  final double? fixWidth;
+  final double? fixWidth; // TVG
 
   const GroupedCheckbox({
     super.key,
@@ -230,7 +230,12 @@ class GroupedCheckbox<T> extends StatelessWidget {
       widgetList.add(buildItem(i, context));
     }
     Widget finalWidget;
-    if (orientation == OptionsOrientation.vertical) {
+    if (orientation == OptionsOrientation.auto) {
+      finalWidget = OverflowBar(
+        alignment: MainAxisAlignment.spaceEvenly,
+        children: widgetList,
+      );
+    } else if (orientation == OptionsOrientation.vertical) {
       finalWidget = SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -278,10 +283,10 @@ class GroupedCheckbox<T> extends StatelessWidget {
       focusColor: focusColor,
       hoverColor: hoverColor,
       materialTapTargetSize: materialTapTargetSize,
-      tristate: tristate,
       value: tristate
           ? value?.contains(optionValue)
           : true == value?.contains(optionValue),
+      tristate: tristate,
       onChanged: isOptionDisabled
           ? null
           : (selected) {

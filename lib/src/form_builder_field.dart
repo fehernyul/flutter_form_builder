@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_form_builder/src/extensions/autovalidatemode_extension.dart';
 
-enum OptionsOrientation { horizontal, vertical, wrap }
+enum OptionsOrientation { horizontal, vertical, wrap, auto }
 
 enum ControlAffinity { leading, trailing }
 
@@ -88,7 +88,8 @@ class FormBuilderFieldState<F extends FormBuilderField<T>, T>
       (_formBuilderState?.initialValue ??
           const <String, dynamic>{})[widget.name] as T?;
 
-  dynamic get transformedValue => widget.valueTransformer?.call(value) ?? value;
+  dynamic get transformedValue =>
+      widget.valueTransformer == null ? value : widget.valueTransformer!(value);
 
   @override
   String? get errorText => super.errorText ?? _customErrorText;
