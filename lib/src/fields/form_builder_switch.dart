@@ -85,6 +85,8 @@ class FormBuilderSwitch extends FormBuilderFieldDecoration<bool> {
   /// Normally, this property is left to its default value, false.
   final bool selected;
 
+  final bool isHovering;
+
   /// {@macro flutter.widgets.Focus.autofocus}
   final bool autofocus;
 
@@ -116,12 +118,13 @@ class FormBuilderSwitch extends FormBuilderFieldDecoration<bool> {
     this.contentPadding = EdgeInsets.zero,
     this.autofocus = false,
     this.selected = false,
+    this.isHovering = false,
   }) : super(
           builder: (FormFieldState<bool?> field) {
             final state = field as _FormBuilderSwitchState;
-
             return InputDecorator(
               decoration: state.decoration,
+              isHovering: isHovering,
               child: SwitchListTile(
                 dense: true,
                 isThreeLine: false,
